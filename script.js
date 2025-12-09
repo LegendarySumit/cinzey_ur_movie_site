@@ -85,17 +85,17 @@ function translatePage(language) {
     const heroTitle = document.querySelector('.hero h1');
     if (heroTitle) heroTitle.textContent = t.hero.title;
 
-    const heroSubtitle = document.querySelector('.hero p');
+    const heroSubtitle = document.querySelector('.hero > p');
     if (heroSubtitle) heroSubtitle.textContent = t.hero.subtitle;
+
+    const heroCTA = document.querySelector('.hero .watch-free');
+    if (heroCTA) heroCTA.textContent = t.hero.cta;
 
     const heroEmailInput = document.querySelector('.hero .email');
     if (heroEmailInput) heroEmailInput.placeholder = t.hero.emailPlaceholder;
 
     const heroGetStarted = document.querySelector('.hero .get-started');
     if (heroGetStarted) heroGetStarted.textContent = t.hero.getStarted;
-
-    const heroCTA = document.querySelector('.hero .watch-free');
-    if (heroCTA) heroCTA.textContent = t.hero.ctaText;
 
     // Carousel
     const carouselHeading = document.querySelector('.carousel-heading');
@@ -104,69 +104,98 @@ function translatePage(language) {
     // Features
     const featureCards = document.querySelectorAll('.feature-card');
     if (featureCards.length >= 4) {
-        featureCards[0].querySelector('h3').textContent = t.features.feature1.title;
-        featureCards[0].querySelector('p').textContent = t.features.feature1.description;
+        featureCards[0].querySelector('h3').textContent = t.features.feature1Title;
+        featureCards[0].querySelector('p').textContent = t.features.feature1Desc;
 
-        featureCards[1].querySelector('h3').textContent = t.features.feature2.title;
-        featureCards[1].querySelector('p').textContent = t.features.feature2.description;
+        featureCards[1].querySelector('h3').textContent = t.features.feature2Title;
+        featureCards[1].querySelector('p').textContent = t.features.feature2Desc;
 
-        featureCards[2].querySelector('h3').textContent = t.features.feature3.title;
-        featureCards[2].querySelector('p').textContent = t.features.feature3.description;
+        featureCards[2].querySelector('h3').textContent = t.features.feature3Title;
+        featureCards[2].querySelector('p').textContent = t.features.feature3Desc;
 
-        featureCards[3].querySelector('h3').textContent = t.features.feature4.title;
-        featureCards[3].querySelector('p').textContent = t.features.feature4.description;
+        featureCards[3].querySelector('h3').textContent = t.features.feature4Title;
+        featureCards[3].querySelector('p').textContent = t.features.feature4Desc;
     }
 
     // FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length >= 6) {
-        faqItems[0].querySelector('.faq-question').textContent = t.faq.question1;
-        faqItems[0].querySelector('.faq-answer').textContent = t.faq.answer1;
+        // FAQ 1
+        const faq1Q = faqItems[0].querySelector('.important-faqs p');
+        const faq1A = faqItems[0].querySelectorAll('.faq-answer p');
+        if (faq1Q) faq1Q.textContent = t.faq.q1;
+        if (faq1A.length >= 2) {
+            faq1A[0].textContent = t.faq.a1p1;
+            faq1A[1].textContent = t.faq.a1p2;
+        }
 
-        faqItems[1].querySelector('.faq-question').textContent = t.faq.question2;
-        faqItems[1].querySelector('.faq-answer').textContent = t.faq.answer2;
+        // FAQ 2
+        const faq2Q = faqItems[1].querySelector('.important-faqs p');
+        const faq2A = faqItems[1].querySelector('.faq-answer p');
+        if (faq2Q) faq2Q.textContent = t.faq.q2;
+        if (faq2A) faq2A.textContent = t.faq.a2;
 
-        faqItems[2].querySelector('.faq-question').textContent = t.faq.question3;
-        faqItems[2].querySelector('.faq-answer').textContent = t.faq.answer3;
+        // FAQ 3
+        const faq3Q = faqItems[2].querySelector('.important-faqs p');
+        const faq3A = faqItems[2].querySelectorAll('.faq-answer p');
+        if (faq3Q) faq3Q.textContent = t.faq.q3;
+        if (faq3A.length >= 2) {
+            faq3A[0].textContent = t.faq.a3p1;
+            faq3A[1].textContent = t.faq.a3p2;
+        }
 
-        faqItems[3].querySelector('.faq-question').textContent = t.faq.question4;
-        faqItems[3].querySelector('.faq-answer').textContent = t.faq.answer4;
+        // FAQ 4
+        const faq4Q = faqItems[3].querySelector('.important-faqs p');
+        const faq4A = faqItems[3].querySelector('.faq-answer p');
+        if (faq4Q) faq4Q.textContent = t.faq.q4;
+        if (faq4A) faq4A.textContent = t.faq.a4;
 
-        faqItems[4].querySelector('.faq-question').textContent = t.faq.question5;
-        faqItems[4].querySelector('.faq-answer').textContent = t.faq.answer5;
+        // FAQ 5
+        const faq5Q = faqItems[4].querySelector('.important-faqs p');
+        const faq5A = faqItems[4].querySelector('.faq-answer p');
+        if (faq5Q) faq5Q.textContent = t.faq.q5;
+        if (faq5A) faq5A.textContent = t.faq.a5;
 
-        faqItems[5].querySelector('.faq-question').textContent = t.faq.question6;
-        faqItems[5].querySelector('.faq-answer').textContent = t.faq.answer6;
+        // FAQ 6
+        const faq6Q = faqItems[5].querySelector('.important-faqs p');
+        const faq6A = faqItems[5].querySelectorAll('.faq-answer p');
+        if (faq6Q) faq6Q.textContent = t.faq.q6;
+        if (faq6A.length >= 2) {
+            faq6A[0].textContent = t.faq.a6p1;
+            faq6A[1].textContent = t.faq.a6p2;
+        }
     }
 
-    // Footer
-    const footerLinks = document.querySelectorAll('footer a');
-    if (footerLinks.length >= 8) {
-        footerLinks[0].textContent = t.footer.faq;
-        footerLinks[1].textContent = t.footer.help;
-        footerLinks[2].textContent = t.footer.account;
-        footerLinks[3].textContent = t.footer.media;
-        footerLinks[4].textContent = t.footer.relations;
-        footerLinks[5].textContent = t.footer.ways;
-        footerLinks[6].textContent = t.footer.terms;
-        footerLinks[7].textContent = t.footer.privacy;
-    }
+    // Footer Links - need to get the exact footer links in order
+    const footerLinks = document.querySelectorAll('footer .links a');
+    const linkKeys = ['faq', 'supportHub', 'dataProtection', 'networkCheck', 'assistanceZone', 
+                      'opportunities', 'privacySettings', 'policyDocuments', 'userProfile', 
+                      'viewingOptions', 'companyDetails', 'exclusiveContent', 'pressRoom', 
+                      'usageGuidelines', 'contactUs'];
+    
+    footerLinks.forEach((link, index) => {
+        if (t.footer.links[linkKeys[index]]) {
+            link.textContent = t.footer.links[linkKeys[index]];
+        }
+    });
 
-    const footerText = document.querySelector('footer p');
-    if (footerText) footerText.textContent = t.footer.contactText;
+    // Footer other elements
+    const cinezyText = document.querySelector('.cinezy p');
+    if (cinezyText) cinezyText.textContent = t.footer.cinezy;
+
+    const recaptchaText = document.querySelector('.ending p');
+    if (recaptchaText) {
+        const learnMoreLink = recaptchaText.querySelector('a');
+        recaptchaText.childNodes[0].textContent = t.footer.recaptcha + ' ';
+        if (learnMoreLink) learnMoreLink.textContent = t.footer.learnMore;
+    }
 
     // Auth Modals
     const signInTitle = document.querySelector('#signInModal .modal-title');
     if (signInTitle) signInTitle.textContent = t.auth.signInTitle;
 
-    const signInEmailLabel = document.querySelector('#signInModal label[for="signInEmail"]');
-    if (signInEmailLabel) signInEmailLabel.textContent = t.auth.emailLabel;
-
     const signInEmailInput = document.getElementById('signInEmail');
     if (signInEmailInput) signInEmailInput.placeholder = t.auth.emailPlaceholder;
-
-    const signInPasswordLabel = document.querySelector('#signInModal label[for="signInPassword"]');
-    if (signInPasswordLabel) signInPasswordLabel.textContent = t.auth.passwordLabel;
 
     const signInPasswordInput = document.getElementById('signInPassword');
     if (signInPasswordInput) signInPasswordInput.placeholder = t.auth.passwordPlaceholder;
@@ -176,10 +205,10 @@ function translatePage(language) {
 
     const signInFooter = document.querySelector('#signInModal .modal-footer');
     if (signInFooter) {
-        const footerText = signInFooter.querySelector('span');
+        const footerSpan = signInFooter.querySelector('span');
         const switchLink = signInFooter.querySelector('a');
-        if (footerText && switchLink) {
-            footerText.textContent = t.auth.newToCinezy + ' ';
+        if (footerSpan && switchLink) {
+            footerSpan.textContent = t.auth.newToCinezy + ' ';
             switchLink.textContent = t.auth.signUpNow;
         }
     }
@@ -191,26 +220,14 @@ function translatePage(language) {
     const signUpTitle = document.querySelector('#signUpModal .modal-title');
     if (signUpTitle) signUpTitle.textContent = t.auth.signUpTitle;
 
-    const signUpNameLabel = document.querySelector('#signUpModal label[for="signUpName"]');
-    if (signUpNameLabel) signUpNameLabel.textContent = t.auth.nameLabel;
-
     const signUpNameInput = document.getElementById('signUpName');
     if (signUpNameInput) signUpNameInput.placeholder = t.auth.namePlaceholder;
-
-    const signUpEmailLabel = document.querySelector('#signUpModal label[for="signUpEmail"]');
-    if (signUpEmailLabel) signUpEmailLabel.textContent = t.auth.emailLabel;
 
     const signUpEmailInput = document.getElementById('signUpEmail');
     if (signUpEmailInput) signUpEmailInput.placeholder = t.auth.emailPlaceholder;
 
-    const signUpPasswordLabel = document.querySelector('#signUpModal label[for="signUpPassword"]');
-    if (signUpPasswordLabel) signUpPasswordLabel.textContent = t.auth.passwordLabel;
-
     const signUpPasswordInput = document.getElementById('signUpPassword');
     if (signUpPasswordInput) signUpPasswordInput.placeholder = t.auth.passwordPlaceholder;
-
-    const signUpConfirmPasswordLabel = document.querySelector('#signUpModal label[for="signUpConfirmPassword"]');
-    if (signUpConfirmPasswordLabel) signUpConfirmPasswordLabel.textContent = t.auth.confirmPasswordLabel;
 
     const signUpConfirmPasswordInput = document.getElementById('signUpConfirmPassword');
     if (signUpConfirmPasswordInput) signUpConfirmPasswordInput.placeholder = t.auth.confirmPasswordPlaceholder;
@@ -220,11 +237,11 @@ function translatePage(language) {
 
     const signUpFooter = document.querySelector('#signUpModal .modal-footer');
     if (signUpFooter) {
-        const footerText = signUpFooter.querySelector('span');
+        const footerSpan = signUpFooter.querySelector('span');
         const switchLink = signUpFooter.querySelector('a');
-        if (footerText && switchLink) {
-            footerText.textContent = t.auth.alreadyMember + ' ';
-            switchLink.textContent = t.auth.signInNow;
+        if (footerSpan && switchLink) {
+            footerSpan.textContent = t.auth.alreadyHaveAccount + ' ';
+            switchLink.textContent = t.auth.signInLink;
         }
     }
 
