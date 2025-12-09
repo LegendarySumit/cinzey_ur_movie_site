@@ -52,6 +52,185 @@ window.switchToSignIn = function() {
 
 // ==================== LANGUAGE DROPDOWN FUNCTIONALITY ====================
 
+// Store translations globally
+let translations = {};
+
+// Load translations from JSON file
+async function loadTranslations() {
+    try {
+        const response = await fetch('translations.json');
+        translations = await response.json();
+        console.log('Translations loaded successfully');
+    } catch (error) {
+        console.error('Error loading translations:', error);
+    }
+}
+
+// Translate the entire page
+function translatePage(language) {
+    if (!translations[language]) {
+        console.error('Translation not available for:', language);
+        return;
+    }
+
+    const t = translations[language];
+
+    // Navigation
+    const signInBtn = document.querySelector('.sign-in');
+    if (signInBtn && !localStorage.getItem('currentUser')) {
+        signInBtn.textContent = t.nav.signIn;
+    }
+
+    // Hero Section
+    const heroTitle = document.querySelector('.hero h1');
+    if (heroTitle) heroTitle.textContent = t.hero.title;
+
+    const heroSubtitle = document.querySelector('.hero p');
+    if (heroSubtitle) heroSubtitle.textContent = t.hero.subtitle;
+
+    const heroEmailInput = document.querySelector('.hero .email');
+    if (heroEmailInput) heroEmailInput.placeholder = t.hero.emailPlaceholder;
+
+    const heroGetStarted = document.querySelector('.hero .get-started');
+    if (heroGetStarted) heroGetStarted.textContent = t.hero.getStarted;
+
+    const heroCTA = document.querySelector('.hero .watch-free');
+    if (heroCTA) heroCTA.textContent = t.hero.ctaText;
+
+    // Carousel
+    const carouselHeading = document.querySelector('.carousel-heading');
+    if (carouselHeading) carouselHeading.textContent = t.carousel.heading;
+
+    // Features
+    const featureCards = document.querySelectorAll('.feature-card');
+    if (featureCards.length >= 4) {
+        featureCards[0].querySelector('h3').textContent = t.features.feature1.title;
+        featureCards[0].querySelector('p').textContent = t.features.feature1.description;
+
+        featureCards[1].querySelector('h3').textContent = t.features.feature2.title;
+        featureCards[1].querySelector('p').textContent = t.features.feature2.description;
+
+        featureCards[2].querySelector('h3').textContent = t.features.feature3.title;
+        featureCards[2].querySelector('p').textContent = t.features.feature3.description;
+
+        featureCards[3].querySelector('h3').textContent = t.features.feature4.title;
+        featureCards[3].querySelector('p').textContent = t.features.feature4.description;
+    }
+
+    // FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (faqItems.length >= 6) {
+        faqItems[0].querySelector('.faq-question').textContent = t.faq.question1;
+        faqItems[0].querySelector('.faq-answer').textContent = t.faq.answer1;
+
+        faqItems[1].querySelector('.faq-question').textContent = t.faq.question2;
+        faqItems[1].querySelector('.faq-answer').textContent = t.faq.answer2;
+
+        faqItems[2].querySelector('.faq-question').textContent = t.faq.question3;
+        faqItems[2].querySelector('.faq-answer').textContent = t.faq.answer3;
+
+        faqItems[3].querySelector('.faq-question').textContent = t.faq.question4;
+        faqItems[3].querySelector('.faq-answer').textContent = t.faq.answer4;
+
+        faqItems[4].querySelector('.faq-question').textContent = t.faq.question5;
+        faqItems[4].querySelector('.faq-answer').textContent = t.faq.answer5;
+
+        faqItems[5].querySelector('.faq-question').textContent = t.faq.question6;
+        faqItems[5].querySelector('.faq-answer').textContent = t.faq.answer6;
+    }
+
+    // Footer
+    const footerLinks = document.querySelectorAll('footer a');
+    if (footerLinks.length >= 8) {
+        footerLinks[0].textContent = t.footer.faq;
+        footerLinks[1].textContent = t.footer.help;
+        footerLinks[2].textContent = t.footer.account;
+        footerLinks[3].textContent = t.footer.media;
+        footerLinks[4].textContent = t.footer.relations;
+        footerLinks[5].textContent = t.footer.ways;
+        footerLinks[6].textContent = t.footer.terms;
+        footerLinks[7].textContent = t.footer.privacy;
+    }
+
+    const footerText = document.querySelector('footer p');
+    if (footerText) footerText.textContent = t.footer.contactText;
+
+    // Auth Modals
+    const signInTitle = document.querySelector('#signInModal .modal-title');
+    if (signInTitle) signInTitle.textContent = t.auth.signInTitle;
+
+    const signInEmailLabel = document.querySelector('#signInModal label[for="signInEmail"]');
+    if (signInEmailLabel) signInEmailLabel.textContent = t.auth.emailLabel;
+
+    const signInEmailInput = document.getElementById('signInEmail');
+    if (signInEmailInput) signInEmailInput.placeholder = t.auth.emailPlaceholder;
+
+    const signInPasswordLabel = document.querySelector('#signInModal label[for="signInPassword"]');
+    if (signInPasswordLabel) signInPasswordLabel.textContent = t.auth.passwordLabel;
+
+    const signInPasswordInput = document.getElementById('signInPassword');
+    if (signInPasswordInput) signInPasswordInput.placeholder = t.auth.passwordPlaceholder;
+
+    const signInButton = document.querySelector('#signInModal button[type="submit"]');
+    if (signInButton) signInButton.textContent = t.auth.signInButton;
+
+    const signInFooter = document.querySelector('#signInModal .modal-footer');
+    if (signInFooter) {
+        const footerText = signInFooter.querySelector('span');
+        const switchLink = signInFooter.querySelector('a');
+        if (footerText && switchLink) {
+            footerText.textContent = t.auth.newToCinezy + ' ';
+            switchLink.textContent = t.auth.signUpNow;
+        }
+    }
+
+    const forgotPassword = document.querySelector('#signInModal .forgot-password');
+    if (forgotPassword) forgotPassword.textContent = t.auth.forgotPassword;
+
+    // Sign Up Modal
+    const signUpTitle = document.querySelector('#signUpModal .modal-title');
+    if (signUpTitle) signUpTitle.textContent = t.auth.signUpTitle;
+
+    const signUpNameLabel = document.querySelector('#signUpModal label[for="signUpName"]');
+    if (signUpNameLabel) signUpNameLabel.textContent = t.auth.nameLabel;
+
+    const signUpNameInput = document.getElementById('signUpName');
+    if (signUpNameInput) signUpNameInput.placeholder = t.auth.namePlaceholder;
+
+    const signUpEmailLabel = document.querySelector('#signUpModal label[for="signUpEmail"]');
+    if (signUpEmailLabel) signUpEmailLabel.textContent = t.auth.emailLabel;
+
+    const signUpEmailInput = document.getElementById('signUpEmail');
+    if (signUpEmailInput) signUpEmailInput.placeholder = t.auth.emailPlaceholder;
+
+    const signUpPasswordLabel = document.querySelector('#signUpModal label[for="signUpPassword"]');
+    if (signUpPasswordLabel) signUpPasswordLabel.textContent = t.auth.passwordLabel;
+
+    const signUpPasswordInput = document.getElementById('signUpPassword');
+    if (signUpPasswordInput) signUpPasswordInput.placeholder = t.auth.passwordPlaceholder;
+
+    const signUpConfirmPasswordLabel = document.querySelector('#signUpModal label[for="signUpConfirmPassword"]');
+    if (signUpConfirmPasswordLabel) signUpConfirmPasswordLabel.textContent = t.auth.confirmPasswordLabel;
+
+    const signUpConfirmPasswordInput = document.getElementById('signUpConfirmPassword');
+    if (signUpConfirmPasswordInput) signUpConfirmPasswordInput.placeholder = t.auth.confirmPasswordPlaceholder;
+
+    const signUpButton = document.querySelector('#signUpModal button[type="submit"]');
+    if (signUpButton) signUpButton.textContent = t.auth.signUpButton;
+
+    const signUpFooter = document.querySelector('#signUpModal .modal-footer');
+    if (signUpFooter) {
+        const footerText = signUpFooter.querySelector('span');
+        const switchLink = signUpFooter.querySelector('a');
+        if (footerText && switchLink) {
+            footerText.textContent = t.auth.alreadyMember + ' ';
+            switchLink.textContent = t.auth.signInNow;
+        }
+    }
+
+    console.log('Page translated to:', language);
+}
+
 function initLanguageDropdown(buttonId, menuId) {
     const langButton = document.getElementById(buttonId);
     const langMenu = document.getElementById(menuId);
@@ -93,6 +272,9 @@ function initLanguageDropdown(buttonId, menuId) {
             
             // Store language preference
             localStorage.setItem('selectedLanguage', selectedLang);
+            
+            // Translate the page
+            translatePage(selectedLang);
         });
     });
 }
@@ -109,7 +291,10 @@ function updateLanguageDisplay(buttonId, language) {
 
 // ==================== DOCUMENT READY ====================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load translations first
+    await loadTranslations();
+    
     // === Authentication Setup ===
     
     // Sign In button click
@@ -261,5 +446,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedLang) {
         updateLanguageDisplay('langButton', savedLang);
         updateLanguageDisplay('langButtonFooter', savedLang);
+        translatePage(savedLang);
+    } else {
+        // Default to English
+        translatePage('English');
     }
 });
