@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="favicon_nw.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="auth-modal.css">
+    <link rel="stylesheet" href="language-dropdown.css">
 </head>
 
 <body>
@@ -16,11 +17,25 @@
             <span><img class="logo" src="assets/images/newlogo-Photoroom.png" alt="Cinezy Logo" width="180"
                     height="50"></span>
             <div class="flex">
-                <button class="lang">
-                    <img src="assets/images/lang.svg" alt="English" width="16" height="16">
-                    <span class="lang-text">English</span>
-                    <img src="assets/images/arrow-down.svg" alt="Arrow" width="22" height="22">
-                </button>
+                <div class="lang-dropdown">
+                    <button class="lang" id="langButton">
+                        <img src="assets/images/lang.svg" alt="Language" width="16" height="16">
+                        <span class="lang-text">English</span>
+                        <img src="assets/images/arrow-down.svg" alt="Arrow" width="22" height="22">
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <div class="lang-option" data-lang="English">English</div>
+                        <div class="lang-option" data-lang="हिन्दी">हिन्दी (Hindi)</div>
+                        <div class="lang-option" data-lang="বাংলা">বাংলা (Bengali)</div>
+                        <div class="lang-option" data-lang="தமிழ்">தமிழ் (Tamil)</div>
+                        <div class="lang-option" data-lang="తెలుగు">తెలుగు (Telugu)</div>
+                        <div class="lang-option" data-lang="ಕನ್ನಡ">ಕನ್ನಡ (Kannada)</div>
+                        <div class="lang-option" data-lang="മലയാളം">മലയാളം (Malayalam)</div>
+                        <div class="lang-option" data-lang="मराठी">मराठी (Marathi)</div>
+                        <div class="lang-option" data-lang="ગુજરાતી">ગુજરાતી (Gujarati)</div>
+                        <div class="lang-option" data-lang="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ (Punjabi)</div>
+                    </div>
+                </div>
                 <button class="sign-in">Sign In</button>
             </div>
         </nav>
@@ -266,11 +281,25 @@
                     </div>
                 </div>
                 <div class="end-container">
-                    <button class="lang">
-                        <img src="assets/images/lang.svg" alt="English" width="16" height="16">
-                        <span class="lang-text">English</span>
-                        <img src="assets/images/arrow-down.svg" alt="Arrow" width="22" height="22">
-                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang" id="langButtonFooter">
+                            <img src="assets/images/lang.svg" alt="Language" width="16" height="16">
+                            <span class="lang-text">English</span>
+                            <img src="assets/images/arrow-down.svg" alt="Arrow" width="22" height="22">
+                        </button>
+                        <div class="lang-menu" id="langMenuFooter">
+                            <div class="lang-option" data-lang="English">English</div>
+                            <div class="lang-option" data-lang="हिन्दी">हिन्दी (Hindi)</div>
+                            <div class="lang-option" data-lang="বাংলা">বাংলা (Bengali)</div>
+                            <div class="lang-option" data-lang="தமிழ்">தமிழ் (Tamil)</div>
+                            <div class="lang-option" data-lang="తెలుగు">తెలుగు (Telugu)</div>
+                            <div class="lang-option" data-lang="ಕನ್ನಡ">ಕನ್ನಡ (Kannada)</div>
+                            <div class="lang-option" data-lang="മലയാളം">മലയാളം (Malayalam)</div>
+                            <div class="lang-option" data-lang="मराठी">मराठी (Marathi)</div>
+                            <div class="lang-option" data-lang="ગુજરાતી">ગુજરાતી (Gujarati)</div>
+                            <div class="lang-option" data-lang="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ (Punjabi)</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="cinezy">
                     <p>Cinezy India</p>
@@ -340,6 +369,7 @@
         </div>
     </div>
 
+    <script src="language.js"></script>
     <script src="auth.js"></script>
 </body>
 
