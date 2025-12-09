@@ -81,43 +81,52 @@ function translatePage(language) {
         signInBtn.textContent = t.nav.signIn;
     }
 
-    // Hero Section
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) heroTitle.textContent = t.hero.title;
+    // Hero Section - uses span tags
+    const heroSpans = document.querySelectorAll('.hero > span');
+    if (heroSpans.length >= 3) {
+        heroSpans[0].textContent = t.hero.title;
+        heroSpans[1].textContent = t.hero.subtitle;
+        heroSpans[2].textContent = t.hero.cta;
+    }
 
-    const heroSubtitle = document.querySelector('.hero > p');
-    if (heroSubtitle) heroSubtitle.textContent = t.hero.subtitle;
-
-    const heroCTA = document.querySelector('.hero .watch-free');
-    if (heroCTA) heroCTA.textContent = t.hero.cta;
-
-    const heroEmailInput = document.querySelector('.hero .email');
+    const heroEmailInput = document.querySelector('.first-email-input');
     if (heroEmailInput) heroEmailInput.placeholder = t.hero.emailPlaceholder;
 
     const heroGetStarted = document.querySelector('.hero .get-started');
-    if (heroGetStarted) heroGetStarted.textContent = t.hero.getStarted;
+    if (heroGetStarted) {
+        // Keep the arrow image, just update text
+        const img = heroGetStarted.querySelector('img');
+        heroGetStarted.textContent = t.hero.getStarted + ' ';
+        if (img) heroGetStarted.appendChild(img);
+    }
 
     // Carousel
     const carouselHeading = document.querySelector('.carousel-heading');
     if (carouselHeading) carouselHeading.textContent = t.carousel.heading;
 
-    // Features
-    const featureCards = document.querySelectorAll('.feature-card');
-    if (featureCards.length >= 4) {
-        featureCards[0].querySelector('h3').textContent = t.features.feature1Title;
-        featureCards[0].querySelector('p').textContent = t.features.feature1Desc;
+    // Features Section
+    const featuresHeading = document.querySelector('.about h3');
+    if (featuresHeading) featuresHeading.textContent = t.features.heading;
 
-        featureCards[1].querySelector('h3').textContent = t.features.feature2Title;
-        featureCards[1].querySelector('p').textContent = t.features.feature2Desc;
+    const features = document.querySelectorAll('.feature');
+    if (features.length >= 4) {
+        features[0].querySelector('h2').textContent = t.features.feature1Title;
+        features[0].querySelector('p').textContent = t.features.feature1Desc;
 
-        featureCards[2].querySelector('h3').textContent = t.features.feature3Title;
-        featureCards[2].querySelector('p').textContent = t.features.feature3Desc;
+        features[1].querySelector('h2').textContent = t.features.feature2Title;
+        features[1].querySelector('p').textContent = t.features.feature2Desc;
 
-        featureCards[3].querySelector('h3').textContent = t.features.feature4Title;
-        featureCards[3].querySelector('p').textContent = t.features.feature4Desc;
+        features[2].querySelector('h2').textContent = t.features.feature3Title;
+        features[2].querySelector('p').textContent = t.features.feature3Desc;
+
+        features[3].querySelector('h2').textContent = t.features.feature4Title;
+        features[3].querySelector('p').textContent = t.features.feature4Desc;
     }
 
-    // FAQ
+    // FAQ Section
+    const faqHeading = document.querySelector('.faq h3');
+    if (faqHeading) faqHeading.textContent = t.faq.heading;
+
     const faqItems = document.querySelectorAll('.faq-item');
     if (faqItems.length >= 6) {
         // FAQ 1
@@ -166,6 +175,20 @@ function translatePage(language) {
         }
     }
 
+    // FAQ CTA text at bottom
+    const faqCTA = document.querySelector('.details h5');
+    if (faqCTA) faqCTA.textContent = t.faq.ctaText;
+
+    const faqEmailInput = document.querySelector('.email-input');
+    if (faqEmailInput) faqEmailInput.placeholder = t.hero.emailPlaceholder;
+
+    const faqGetStarted = document.querySelectorAll('.get-started')[1]; // Second get-started button
+    if (faqGetStarted) {
+        const img = faqGetStarted.querySelector('img');
+        faqGetStarted.textContent = t.hero.getStarted + ' ';
+        if (img) faqGetStarted.appendChild(img);
+    }
+
     // Footer Links - need to get the exact footer links in order
     const footerLinks = document.querySelectorAll('footer .links a');
     const linkKeys = ['faq', 'supportHub', 'dataProtection', 'networkCheck', 'assistanceZone', 
@@ -178,6 +201,18 @@ function translatePage(language) {
             link.textContent = t.footer.links[linkKeys[index]];
         }
     });
+
+    // Footer queries text
+    const queriesText = document.querySelector('.queries p');
+    if (queriesText) {
+        // This contains "Any Queries? Call" + phone number in <u> tag
+        const phoneUnderline = queriesText.querySelector('u');
+        if (phoneUnderline) {
+            const phoneNumber = phoneUnderline.textContent;
+            queriesText.childNodes[0].textContent = t.footer.queries + ' ';
+            phoneUnderline.textContent = phoneNumber;
+        }
+    }
 
     // Footer other elements
     const cinezyText = document.querySelector('.cinezy p');
