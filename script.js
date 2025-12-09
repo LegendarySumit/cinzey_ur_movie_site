@@ -1,4 +1,4 @@
-// Authentication functionality for Cinezy
+// ==================== AUTHENTICATION FUNCTIONALITY ====================
 
 // Modal management
 function openModal(modalId) {
@@ -25,8 +25,93 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Sign In functionality
+// Update UI for logged in user
+function updateUIForLoggedInUser(userName) {
+    const signInBtn = document.querySelector('.sign-in');
+    if (signInBtn) {
+        signInBtn.textContent = userName;
+        signInBtn.onclick = function() {
+            if (confirm('Do you want to sign out?')) {
+                localStorage.removeItem('currentUser');
+                location.reload();
+            }
+        };
+    }
+}
+
+// Switch between Sign In and Sign Up
+window.switchToSignUp = function() {
+    closeModal('signInModal');
+    openModal('signUpModal');
+}
+
+window.switchToSignIn = function() {
+    closeModal('signUpModal');
+    openModal('signInModal');
+}
+
+// ==================== LANGUAGE DROPDOWN FUNCTIONALITY ====================
+
+function initLanguageDropdown(buttonId, menuId) {
+    const langButton = document.getElementById(buttonId);
+    const langMenu = document.getElementById(menuId);
+    
+    if (!langButton || !langMenu) return;
+    
+    // Toggle dropdown
+    langButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        langMenu.classList.toggle('active');
+        langButton.classList.toggle('active');
+        
+        // Close other dropdown if open
+        const otherMenuId = menuId === 'langMenu' ? 'langMenuFooter' : 'langMenu';
+        const otherButtonId = buttonId === 'langButton' ? 'langButtonFooter' : 'langButton';
+        const otherMenu = document.getElementById(otherMenuId);
+        const otherButton = document.getElementById(otherButtonId);
+        
+        if (otherMenu && otherButton) {
+            otherMenu.classList.remove('active');
+            otherButton.classList.remove('active');
+        }
+    });
+    
+    // Select language option
+    const langOptions = langMenu.querySelectorAll('.lang-option');
+    langOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const selectedLang = this.getAttribute('data-lang');
+            
+            // Update both dropdowns
+            updateLanguageDisplay('langButton', selectedLang);
+            updateLanguageDisplay('langButtonFooter', selectedLang);
+            
+            // Close dropdown
+            langMenu.classList.remove('active');
+            langButton.classList.remove('active');
+            
+            // Store language preference
+            localStorage.setItem('selectedLanguage', selectedLang);
+        });
+    });
+}
+
+function updateLanguageDisplay(buttonId, language) {
+    const button = document.getElementById(buttonId);
+    if (button) {
+        const langText = button.querySelector('.lang-text');
+        if (langText) {
+            langText.textContent = language;
+        }
+    }
+}
+
+// ==================== DOCUMENT READY ====================
+
 document.addEventListener('DOMContentLoaded', function() {
+    // === Authentication Setup ===
+    
     // Sign In button click
     const signInBtn = document.querySelector('.sign-in');
     if (signInBtn) {
@@ -57,10 +142,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('signInPassword').value;
             const errorMsg = document.getElementById('signInError');
 
-            // Clear previous errors
             errorMsg.textContent = '';
 
-            // Validate
             if (!validateEmail(email)) {
                 errorMsg.textContent = 'Please enter a valid email address';
                 return;
@@ -71,11 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Check if user exists in localStorage
             const users = JSON.parse(localStorage.getItem('cinezUsers')) || {};
             
             if (users[email] && users[email].password === password) {
-                // Success
                 localStorage.setItem('currentUser', email);
                 alert('Welcome back, ' + users[email].name + '!');
                 closeModal('signInModal');
@@ -98,10 +179,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmPassword = document.getElementById('signUpConfirmPassword').value;
             const errorMsg = document.getElementById('signUpError');
 
-            // Clear previous errors
             errorMsg.textContent = '';
 
-            // Validate
             if (name.trim().length < 2) {
                 errorMsg.textContent = 'Please enter your name';
                 return;
@@ -122,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Check if user already exists
             const users = JSON.parse(localStorage.getItem('cinezUsers')) || {};
             
             if (users[email]) {
@@ -130,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Create new user
             users[email] = {
                 name: name,
                 password: password,
@@ -144,17 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal('signUpModal');
             updateUIForLoggedInUser(name);
         });
-    }
-
-    // Switch between Sign In and Sign Up
-    window.switchToSignUp = function() {
-        closeModal('signInModal');
-        openModal('signUpModal');
-    }
-
-    window.switchToSignIn = function() {
-        closeModal('signUpModal');
-        openModal('signInModal');
     }
 
     // Check if user is already logged in
@@ -175,18 +241,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         localStorage.removeItem('signupEmail');
     }
-});
 
-// Update UI for logged in user
-function updateUIForLoggedInUser(userName) {
-    const signInBtn = document.querySelector('.sign-in');
-    if (signInBtn) {
-        signInBtn.textContent = userName;
-        signInBtn.onclick = function() {
-            if (confirm('Do you want to sign out?')) {
-                localStorage.removeItem('currentUser');
-                location.reload();
-            }
-        };
+    // === Language Dropdown Setup ===
+    
+    initLanguageDropdown('langButton', 'langMenu');
+    initLanguageDropdown('langButtonFooter', 'langMenuFooter');
+
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', function() {
+        const langMenus = document.querySelectorAll('.lang-menu');
+        const langButtons = document.querySelectorAll('.lang');
+        
+        langMenus.forEach(menu => menu.classList.remove('active'));
+        langButtons.forEach(button => button.classList.remove('active'));
+    });
+
+    // Load saved language preference
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang) {
+        updateLanguageDisplay('langButton', savedLang);
+        updateLanguageDisplay('langButtonFooter', savedLang);
     }
-}
+});
