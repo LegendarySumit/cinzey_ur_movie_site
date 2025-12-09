@@ -84,9 +84,9 @@ function translatePage(language) {
     // Hero Section - uses span tags
     const heroSpans = document.querySelectorAll('.hero > span');
     if (heroSpans.length >= 3) {
-        heroSpans[0].textContent = t.hero.title;
-        heroSpans[1].textContent = t.hero.subtitle;
-        heroSpans[2].textContent = t.hero.cta;
+        if (heroSpans[0]) heroSpans[0].textContent = t.hero.title;
+        if (heroSpans[1]) heroSpans[1].textContent = t.hero.subtitle;
+        if (heroSpans[2]) heroSpans[2].textContent = t.hero.cta;
     }
 
     const heroEmailInput = document.querySelector('.first-email-input');
@@ -110,17 +110,25 @@ function translatePage(language) {
 
     const features = document.querySelectorAll('.feature');
     if (features.length >= 4) {
-        features[0].querySelector('h2').textContent = t.features.feature1Title;
-        features[0].querySelector('p').textContent = t.features.feature1Desc;
+        const feature1H2 = features[0].querySelector('h2');
+        const feature1P = features[0].querySelector('p');
+        if (feature1H2) feature1H2.textContent = t.features.feature1Title;
+        if (feature1P) feature1P.textContent = t.features.feature1Desc;
 
-        features[1].querySelector('h2').textContent = t.features.feature2Title;
-        features[1].querySelector('p').textContent = t.features.feature2Desc;
+        const feature2H2 = features[1].querySelector('h2');
+        const feature2P = features[1].querySelector('p');
+        if (feature2H2) feature2H2.textContent = t.features.feature2Title;
+        if (feature2P) feature2P.textContent = t.features.feature2Desc;
 
-        features[2].querySelector('h2').textContent = t.features.feature3Title;
-        features[2].querySelector('p').textContent = t.features.feature3Desc;
+        const feature3H2 = features[2].querySelector('h2');
+        const feature3P = features[2].querySelector('p');
+        if (feature3H2) feature3H2.textContent = t.features.feature3Title;
+        if (feature3P) feature3P.textContent = t.features.feature3Desc;
 
-        features[3].querySelector('h2').textContent = t.features.feature4Title;
-        features[3].querySelector('p').textContent = t.features.feature4Desc;
+        const feature4H2 = features[3].querySelector('h2');
+        const feature4P = features[3].querySelector('p');
+        if (feature4H2) feature4H2.textContent = t.features.feature4Title;
+        if (feature4P) feature4P.textContent = t.features.feature4Desc;
     }
 
     // FAQ Section
